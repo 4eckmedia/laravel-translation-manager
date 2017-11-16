@@ -35,6 +35,9 @@ class Manager
     const DB_CONNECTIONS_KEY = 'db_connections';
     const PERSISTENT_PREFIX_KEY = 'persistent_prefix';
     const EXCLUDE_PAGE_EDIT_GROUPS_KEY = 'exclude_page_edit_groups';
+    const INPLACE_ADVANCED_FEATURES = 'inplace_advanced_features';
+    const INPLACE_ADVANCED_EMBEDDED_TRANSLATIONS = 'inplace_advanced_embedded_translations';
+    const EXCLUDE_PAGE_EDIT_ADVANCED_SUFFIX = 'exclude_page_edit_advanced_suffixes';
     const LOG_MISSING_KEYS_KEY = 'log_missing_keys';
     const EXCLUDE_GROUPS_KEY = 'exclude_groups';
     const MISSING_KEYS_LOTTERY_KEY = 'missing_keys_lottery';

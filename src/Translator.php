@@ -661,7 +661,23 @@ HTML;
      */
     public function trans($id, array $parameters = array(), $locale = null, $domain = 'messages', $useDB = null)
     {
-        return $this->get($id, $parameters, $locale, true, $useDB);
+	    $inplaceEditMode = $this->manager->config('inplace_edit_mode');
+	    if ($inplaceEditMode == 1 && $this->inPlaceEditing()) {
+		    $inplaceAdvancedFeatures = $this->manager->config( Manager::INPLACE_ADVANCED_FEATURES );
+		    if ($inplaceAdvancedFeatures) {
+			    $suffixes = join('|', array_map('preg_quote', $this->manager->config(Manager::EXCLUDE_PAGE_EDIT_ADVANCED_SUFFIX), array('#')));
+			    $suspendableSuffix = preg_match('#.+('.$suffixes.')$#', $id) !== false;
+			    if ($suspendableSuffix) {
+				    $this->suspendInPlaceEditing();
+			    }
+			    $translation = $this->get($id, $parameters, $locale, true, $useDB);
+			    if ($suspendableSuffix) {
+				    $this->resumeInPlaceEditing();
+			    }
+			    return $translation;
+		    }
+	    }
+	    return $this->get($id, $parameters, $locale, true, $useDB);
     }
 
     /**

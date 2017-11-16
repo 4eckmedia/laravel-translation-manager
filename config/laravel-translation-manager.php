@@ -84,7 +84,33 @@ return array(
      *  1 - Using trans(), noEditTrans(), ifEditTrans() in all templates
      *  2 - Only by modifying application template (disables ifEditTrans and reverts trans() to default functionality)
      */
-    'inplace_edit_mode' => 2,
+    'inplace_edit_mode' => 1,
+
+    /**
+     *  Inplace Advanced features
+     *  Only used, if inplace_edit_mode is 1.
+     *  It will use a different method to show editable translations inside pages,
+     *  which won't require to replace @lang, __() and so on with ifEditTrans() and noEditTrans(),
+     *  such allowing to deactivate the service provider by environment and allowing other translation tools
+     *  which scan files for translations, to still identify them.
+     *  Further, it can skip some translations from making them editable, as example when they are
+     *  inside tag attributes (requires further setup).
+     *
+     * @type boolean
+     */
+    'inplace_advanced_features' => true,
+
+    /**
+     * Instead of duplicating a text and/or making it a link, with this setting
+     * the Laravel Translation Manager tries to have as little impact on layout and page
+     * as possible, by adding rather a small clickable icon on the beginning of a translation
+     * and that neither as link nor in some html-breaking way.
+     * Requires inplace_advanced_features to be true for this setting to have an effect
+     *
+     * @type boolean
+     */
+    'inplace_advanced_embedded_translations' => true,
+
     /**
      * Enable management of translations for editors by locales
      *
@@ -176,6 +202,23 @@ return array(
         //'page-titles',
         //'reminders',
         //'validation',
+    ),
+    /**
+     * Excludes specific keys with specific suffixes from Laravel Translation Manager.
+     * This is useful if you want to avoid some keys to be output for editing, for example, because
+     * they are used as attribute values in html tags. In this way, you don't need to replace in all your
+     * templates with noEditTrans(), but you can keep it working with and without this package and
+     * depending on how you organized your keys, may need to rename little to none keys.
+     *
+     * Requires inplace_advanced_features to be true for this setting to have an effect.
+     *
+     * @type array
+     */
+    'exclude_page_edit_advanced_suffixes' => array(
+	    //'-href',
+	    //'--title',
+	    //'-alt-',
+	    //'.src'
     ),
     /**
      * determines whether missing keys are logged
