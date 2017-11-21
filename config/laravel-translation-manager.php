@@ -100,7 +100,8 @@ return array(
      */
     'inplace_advanced_features' => true,
 
-    /**
+    /* *
+     * NOT YET SUPPORTED
      * Instead of duplicating a text and/or making it a link, with this setting
      * the Laravel Translation Manager tries to have as little impact on layout and page
      * as possible, by adding rather a small clickable icon on the beginning of a translation
@@ -109,7 +110,7 @@ return array(
      *
      * @type boolean
      */
-    'inplace_advanced_embedded_translations' => true,
+    //'inplace_advanced_embedded_translations' => true,
 
     /**
      * Enable management of translations for editors by locales
@@ -218,8 +219,21 @@ return array(
 	    //'-href',
 	    //'--title',
 	    //'-alt-',
-	    //'.src'
+	    //'.src'  // this would require the whole key to be an array however
     ),
+
+    /**
+     * An easier approach to suffixes. Define a character that will separate keys and
+     * signal, that what follows after a specific character is not in-place editable.
+     * This can be used in translations to show association to a common key.
+     * As example: 'global.company_site' would contain the name of a site, while 'global.company_site:href'
+     * would contain the link to it. It would be used like this:
+     *   <a href="@lang('global.company_site:href')">@lang('global.company_site')</a>
+     * Now, laravel translation manager would not attempt to make the href-attribute in-place editable.
+     *
+     */
+    'exclude_page_edit_advanced_suffix_char' => ':',
+
     /**
      * determines whether missing keys are logged
      *

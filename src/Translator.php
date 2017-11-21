@@ -119,7 +119,7 @@ class Translator extends LaravelTranslator
             $queuedCookieLocale = \Cookie::queued($key, null);
             $locale = getSupportedLocale($queuedCookieLocale != null ? $queuedCookieLocale->getValue() : \Cookie::get($key, ''));
             parent::setLocale($locale);
-            
+
             // load unpublished translation flag at the same time
             $this->getShowUnpublished();
             $this->cookiesLoaded = true;
@@ -456,8 +456,24 @@ class Translator extends LaravelTranslator
             }
         }
 
-        if (!$this->suspendInPlaceEdit && $this->inPlaceEditing() && $inplaceEditMode == 1) {
-            $this->notifyUsingGroupItem($namespace, $group, $item, $locale);
+	    $suspendableSuffix = false;
+	    if ($inplaceEditMode == 1 && $this->inPlaceEditing()) {
+		    $inplaceAdvancedFeatures = $this->manager->config( Manager::INPLACE_ADVANCED_FEATURES );
+		    if ($inplaceAdvancedFeatures) {
+			    $suffixes = join('|', array_map('preg_quote',
+				    $this->manager->config(Manager::EXCLUDE_PAGE_EDIT_ADVANCED_SUFFIX), array('#')));
+			    $suspendableSuffix = (
+			                         strpos( $item,
+				                         $this->manager->config( Manager::EXCLUDE_PAGE_EDIT_ADVANCED_SUFFIX_CHAR ) )
+
+			                         )
+			                         || ( preg_match( '#.+(' . $suffixes . ')$#', $key ) > 0 );
+		    }
+	    }
+
+
+	    if (!$this->suspendInPlaceEdit && !$suspendableSuffix && $this->inPlaceEditing() && $inplaceEditMode == 1) {
+		    $this->notifyUsingGroupItem($namespace, $group, $item, $locale);
             return $this->inPlaceEditLink(null, true, $key, $locale);
         }
 
@@ -661,22 +677,6 @@ HTML;
      */
     public function trans($id, array $parameters = array(), $locale = null, $domain = 'messages', $useDB = null)
     {
-	    $inplaceEditMode = $this->manager->config('inplace_edit_mode');
-	    if ($inplaceEditMode == 1 && $this->inPlaceEditing()) {
-		    $inplaceAdvancedFeatures = $this->manager->config( Manager::INPLACE_ADVANCED_FEATURES );
-		    if ($inplaceAdvancedFeatures) {
-			    $suffixes = join('|', array_map('preg_quote', $this->manager->config(Manager::EXCLUDE_PAGE_EDIT_ADVANCED_SUFFIX), array('#')));
-			    $suspendableSuffix = preg_match('#.+('.$suffixes.')$#', $id) !== false;
-			    if ($suspendableSuffix) {
-				    $this->suspendInPlaceEditing();
-			    }
-			    $translation = $this->get($id, $parameters, $locale, true, $useDB);
-			    if ($suspendableSuffix) {
-				    $this->resumeInPlaceEditing();
-			    }
-			    return $translation;
-		    }
-	    }
 	    return $this->get($id, $parameters, $locale, true, $useDB);
     }
 
