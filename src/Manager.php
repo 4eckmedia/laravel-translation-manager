@@ -27,25 +27,26 @@ use ZipArchive;
  */
 class Manager
 {
-    const INDATABASE_PUBLISH_KEY = 'indatabase_publish';
-    const DEFAULT_DB_CONNECTION_KEY = 'default_connection';
-    const USER_LOCALES_ENABLED = 'user_locales_enabled';
-    const PDO_FETCH_MODE_ENABLED = 'pdo_fetch_mode_enabled';
-    const USER_LIST_CONNECTION_KEY = 'user_list_connection';
-    const DB_CONNECTIONS_KEY = 'db_connections';
-    const PERSISTENT_PREFIX_KEY = 'persistent_prefix';
-    const EXCLUDE_PAGE_EDIT_GROUPS_KEY = 'exclude_page_edit_groups';
-    const INPLACE_ADVANCED_FEATURES = 'inplace_advanced_features';
-    const INPLACE_ADVANCED_EMBEDDED_TRANSLATIONS = 'inplace_advanced_embedded_translations';
-    const EXCLUDE_PAGE_EDIT_ADVANCED_SUFFIX = 'exclude_page_edit_advanced_suffixes';
-    const LOG_MISSING_KEYS_KEY = 'log_missing_keys';
-    const EXCLUDE_GROUPS_KEY = 'exclude_groups';
-    const MISSING_KEYS_LOTTERY_KEY = 'missing_keys_lottery';
-    const LOTTERY_PERSISTENT_SUFFIX = 'lottery';
-    const LOG_KEY_USAGE_INFO_KEY = 'log_key_usage_info';
-    const ADDITIONAL_LOCALES_KEY = 'locales';
-    const SHOW_LOCALES_KEY = 'show_locales';
-    const MARKDOWN_KEY_SUFFIX = 'markdown_key_suffix';
+	const INDATABASE_PUBLISH_KEY = 'indatabase_publish';
+	const DEFAULT_DB_CONNECTION_KEY = 'default_connection';
+	const USER_LOCALES_ENABLED = 'user_locales_enabled';
+	const PDO_FETCH_MODE_ENABLED = 'pdo_fetch_mode_enabled';
+	const USER_LIST_CONNECTION_KEY = 'user_list_connection';
+	const DB_CONNECTIONS_KEY = 'db_connections';
+	const PERSISTENT_PREFIX_KEY = 'persistent_prefix';
+	const EXCLUDE_PAGE_EDIT_GROUPS_KEY = 'exclude_page_edit_groups';
+	const INPLACE_ADVANCED_FEATURES = 'inplace_advanced_features';
+	const INPLACE_ADVANCED_EMBEDDED_TRANSLATIONS = 'inplace_advanced_embedded_translations';
+	const EXCLUDE_PAGE_EDIT_ADVANCED_SUFFIX = 'exclude_page_edit_advanced_suffixes';
+	const EXCLUDE_PAGE_EDIT_ADVANCED_SUFFIX_CHAR = 'exclude_page_edit_advanced_suffix_char';
+	const LOG_MISSING_KEYS_KEY = 'log_missing_keys';
+	const EXCLUDE_GROUPS_KEY = 'exclude_groups';
+	const MISSING_KEYS_LOTTERY_KEY = 'missing_keys_lottery';
+	const LOTTERY_PERSISTENT_SUFFIX = 'lottery';
+	const LOG_KEY_USAGE_INFO_KEY = 'log_key_usage_info';
+	const ADDITIONAL_LOCALES_KEY = 'locales';
+	const SHOW_LOCALES_KEY = 'show_locales';
+	const MARKDOWN_KEY_SUFFIX = 'markdown_key_suffix';
 
     const ABILITY_ADMIN_TRANSLATIONS = 'ltm-admin-translations';
     const ABILITY_BYPASS_LOTTERY = 'ltm-bypass-lottery';
