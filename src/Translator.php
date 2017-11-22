@@ -465,9 +465,9 @@ class Translator extends LaravelTranslator
 			    $suspendableSuffix = (
 			                         strpos( $item,
 				                         $this->manager->config( Manager::EXCLUDE_PAGE_EDIT_ADVANCED_SUFFIX_CHAR ) )
-
 			                         )
-			                         || ( preg_match( '#.+(' . $suffixes . ')$#', $key ) > 0 );
+			                         || ! empty( $suffixes )
+			                            && ( preg_match( '#.+(' . $suffixes . ')$#', $key ) > 0 );
 		    }
 	    }
 
