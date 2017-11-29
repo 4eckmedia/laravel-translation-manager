@@ -472,7 +472,8 @@ class Translator extends LaravelTranslator
 	    }
 
 
-	    if (!$this->suspendInPlaceEdit && !$suspendableSuffix && $this->inPlaceEditing() && $inplaceEditMode == 1) {
+	    if (!$this->suspendInPlaceEdit && !$suspendableSuffix && $this->inPlaceEditing() && $inplaceEditMode == 1
+	        && !$this->manager->excludedPageEditGroup($group) && !$this->manager->excludedPageEditGroup($key)) {
 		    $this->notifyUsingGroupItem($namespace, $group, $item, $locale);
             return $this->inPlaceEditLink(null, true, $key, $locale);
         }
