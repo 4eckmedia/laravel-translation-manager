@@ -31,6 +31,7 @@ class Translator extends LaravelTranslator
     protected $cookiePrefix;
     protected $useCookies;
     protected $cookiesLoaded;
+    protected $disallow_cookie_set_locale;
 
     // Storage used for used translation keys
     protected $usedKeys = array();
@@ -725,7 +726,8 @@ HTML;
         $this->packagePrefix = $this->package . '::';
         $this->cookiePrefix = $this->manager->config('persistent_prefix', $this->packagePrefix);
         $this->useCookies = $this->manager->config('use_cookies', true);
-        $this->cookiesLoaded = !$this->useCookies;
+	    $this->cookiesLoaded = !$this->useCookies;
+        $this->disallow_cookie_set_locale = $this->manager->config('disallow_cookie_set_locale', false);
     }
 
     protected function notifyMissingGroupItem($namespace, $group, $item, $locale = null)
