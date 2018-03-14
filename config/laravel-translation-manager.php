@@ -80,6 +80,12 @@ return array(
      */
     'use_cookies' => false,
     /**
+     * disallow cookie to set user locale,
+     *
+     * @type boolean
+     */
+    'disallow_cookie_set_locale' => false,
+    /**
      *  Inplace edit mode
      *  1 - Using trans(), noEditTrans(), ifEditTrans() in all templates
      *  2 - Only by modifying application template (disables ifEditTrans and reverts trans() to default functionality)

@@ -137,7 +137,9 @@ class Translator extends LaravelTranslator
     public function setLocale($locale)
     {
         if ($this->useCookies) {
-            Cookie::queue($this->cookiePrefix . 'lang_locale', $locale);
+            if (! $this->disallow_cookie_set_locale) {
+                \Cookie::queue($this->cookiePrefix . 'lang_locale', $locale);
+            }
         }
         parent::setLocale($locale);
     }
@@ -179,7 +181,9 @@ class Translator extends LaravelTranslator
     public function setShowUnpublished($showUnpublished)
     {
         if ($this->useCookies) {
-            Cookie::queue($this->cookiePrefix . 'show_unpublished', $showUnpublished);
+	        if (! $this->disallow_cookie_set_locale) {
+		        Cookie::queue($this->cookiePrefix . 'show_unpublished', $showUnpublished);
+	        }
         }
         $this->useDB = $showUnpublished ? 2 : 1;
     }
